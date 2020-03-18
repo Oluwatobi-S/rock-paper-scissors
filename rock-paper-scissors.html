@@ -8,50 +8,94 @@
 
 
         <script>
-            //define the game's items:
-            const gameItems = ['rock', 'paper', 'scissors'];
+            //game's program:
+            function game(){
+                //game's item options:
+                const gameItems = ['rock', 'paper', 'scissors'];
 
-            //random item selection from above gameItems array for the computer's item choice:
-            function computerPlay(){
-                const itemChoice = Math.floor(Math.random()*gameItems.length);
-                return gameItems[itemChoice];
-            }
+                //value containers:
+                let i;
+                let playerSelection;
+                let computerSelection;
+                let winOrLose;
+                let myScore = 0;
+                let compScore = 0;
 
-            //player selects an item:
-            const playerPick = prompt("Rock, Paper, or Scissors? What's your choice?");
-            const playerSelection = playerPick.toLowerCase();
-            console.log(`My Selection is: ${playerSelection}`);
+                for (i = 0; i < 5; i++) {
+                    //player selects an item:
+                    const playerSelection = 
+                    prompt("Rock, Paper, or Scissors? What's your choice?").toLowerCase();
+                    console.log(`My Selection is: ${playerSelection}`);
 
-            //computer selects an item:
-            const computerSelection = computerPlay();
-            console.log(`Computer's Selection is: ${computerSelection}`);
+                    //random item selection from gameItems array for computer's item choice:
+                    function computerPlay() {
+                        const itemChoice = Math.floor(Math.random()*gameItems.length);
+                        return gameItems[itemChoice];
+                    }
 
-            //winner determination logic:
-            function playRound(pSelection, cSelection){
-                if (pSelection === 'rock' && cSelection === 'scissors') {
-                    return 'You Win! Rock crushes Scissors';
-                } else if (pSelection === 'scissors' && cSelection === 'rock') {
-                    return 'You Lose! Rock crushes Scissors';
-                } else if (pSelection === 'rock' && cSelection === 'paper') {
-                    return 'You Lose! Paper covers Rock';
-                } else if (pSelection === 'paper' && cSelection === 'rock') {
-                    return 'You Win! Paper covers Rock';
-                } else if (pSelection === 'paper' && cSelection === 'scissors') {
-                    return 'You Lose! Scissors cuts Paper';
-                } else if (pSelection === 'scissors' && cSelection === 'paper') {
-                    return 'You Win! Scissors cuts Paper';
-                } else if (pSelection !== 'rock' || 'paper' || 'scissors' ) {
-                    return ("Oops! That's a wrong choice!" + 
-                    "\nChoose either Rock, Paper, or Scissors." + 
-                    "\nAll the best!");
+                    //computer selects an item:
+                    computerSelection = computerPlay();
+                    console.log(`Computer's Selection is: ${computerSelection}`);
+
+                    //determine winner:
+                    winOrLose = playRound(playerSelection, computerSelection);
+
+                    //score logic:
+                    if (winOrLose === 'You Win!') {
+                            console.log(winOrLose);
+                            console.log("***========================***");
+                            ++myScore;
+                        } else if (winOrLose === "It's a tie!") {
+                            console.log(winOrLose);
+                            console.log("***========================***");
+                        } else {
+                            console.log(winOrLose);
+                            console.log("***========================***");
+                            ++compScore;
+                    }
+                }
+
+                //winner determination logic:
+                function playRound(pSelection, cSelection) {
+                    if (pSelection === 'rock' && cSelection === 'scissors') {
+                        return 'You Win!';
+                    } else if (pSelection === 'scissors' && cSelection === 'rock') {
+                        return 'You Lose! Rock crushes Scissors';
+                    } else if (pSelection === 'rock' && cSelection === 'paper') {
+                        return 'You Lose! Paper covers Rock';
+                    } else if (pSelection === 'paper' && cSelection === 'rock') {
+                        return 'You Win!';
+                    } else if (pSelection === 'paper' && cSelection === 'scissors') {
+                        return 'You Lose! Scissors cuts Paper';
+                    } else if (pSelection === 'scissors' && cSelection === 'paper') {
+                        return 'You Win!';
+                    } else if (pSelection !== ('rock' || 'paper' || 'scissors') ) {
+                        return ("Oops! That's a wrong choice!" + 
+                        "\nChoose either Rock, Paper, or Scissors" + 
+                        "\nAll the best!");
+                    } else {
+                        return "It's a tie!"
+                    }
+                }
+
+                //display total score:
+                console.log (`Player: ${myScore} vs. Computer: ${compScore}`)
+
+                //appraisal message logic:
+                if (myScore > compScore) {
+                    console.log ("Congratulations!!! You won the game!");
+                    console.log("***========================***");
+                }else if (myScore === compScore) {
+                    console.log ("That's a Draw!");
+                    console.log("***========================***");
                 } else {
-                    return "It's a tie! Your items are the same!"
+                    console.log ("Game Lost. Try again.");
+                    console.log("***========================***");
                 }
             }
 
-            //run the winner determination logic to output the winner:
-            console.log(playRound(playerSelection, computerSelection));
-
+            //invoke game:
+            game();
         </script>
     </body>
 </html>
