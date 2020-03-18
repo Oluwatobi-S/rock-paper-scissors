@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+    </head>
+    <body>
+        <h1>The Rock Paper Scissors Game</h1>
+
+
+        <script>
+            //define the game's items:
+            const gameItems = ['rock', 'paper', 'scissors'];
+
+            //random item selection from above gameItems array for the computer's item choice:
+            function computerPlay(){
+                const itemChoice = Math.floor(Math.random()*gameItems.length);
+                return gameItems[itemChoice];
+            }
+
+            //player selects an item:
+            const playerPick = prompt("Rock, Paper, or Scissors? What's your choice?");
+            const playerSelection = playerPick.toLowerCase();
+            console.log(`My Selection is: ${playerSelection}`);
+
+            //computer selects an item:
+            const computerSelection = computerPlay();
+            console.log(`Computer's Selection is: ${computerSelection}`);
+
+            //winner determination logic:
+            function playRound(pSelection, cSelection){
+                if (pSelection === 'rock' && cSelection === 'scissors') {
+                    return 'You Win! Rock crushes Scissors';
+                } else if (pSelection === 'scissors' && cSelection === 'rock') {
+                    return 'You Lose! Rock crushes Scissors';
+                } else if (pSelection === 'rock' && cSelection === 'paper') {
+                    return 'You Lose! Paper covers Rock';
+                } else if (pSelection === 'paper' && cSelection === 'rock') {
+                    return 'You Win! Paper covers Rock';
+                } else if (pSelection === 'paper' && cSelection === 'scissors') {
+                    return 'You Lose! Scissors cuts Paper';
+                } else if (pSelection === 'scissors' && cSelection === 'paper') {
+                    return 'You Win! Scissors cuts Paper';
+                } else if (pSelection !== 'rock' || 'paper' || 'scissors' ) {
+                    return ("Oops! That's a wrong choice!" + 
+                    "\nChoose either Rock, Paper, or Scissors." + 
+                    "\nAll the best!");
+                } else {
+                    return "It's a tie! Your items are the same!"
+                }
+            }
+
+            //run the winner determination logic to output the winner:
+            console.log(playRound(playerSelection, computerSelection));
+
+        </script>
+    </body>
+</html>
