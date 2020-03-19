@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
     </head>
     <body>
@@ -25,6 +26,7 @@
                     //player selects an item:
                     const playerSelection = 
                     prompt("Rock, Paper, or Scissors? What's your choice?").toLowerCase();
+                    
                     console.log(`My Selection is: ${playerSelection}`);
 
                     //random item selection from gameItems array for computer's item choice:
@@ -69,12 +71,16 @@
                         return 'You Lose! Scissors cuts Paper';
                     } else if (pSelection === 'scissors' && cSelection === 'paper') {
                         return 'You Win!';
-                    } else if (pSelection !== ('rock' || 'paper' || 'scissors') ) {
+                    } else if (pSelection === 'rock' && cSelection === 'rock') {
+                        return "It's a tie!";
+                    } else if (pSelection === 'scissors' && cSelection === 'scissors') {
+                        return "It's a tie!";
+                    } else if (pSelection === 'paper' && cSelection === 'paper') {
+                        return "It's a tie!";
+                    } else {
                         return ("Oops! That's a wrong choice!" + 
                         "\nChoose either Rock, Paper, or Scissors" + 
                         "\nAll the best!");
-                    } else {
-                        return "It's a tie!"
                     }
                 }
 
