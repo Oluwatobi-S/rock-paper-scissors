@@ -7,87 +7,93 @@
     <body>
         <h1>The Rock Paper Scissors Game</h1>
 
-
         <script>
-            //game's program:
-            function game(){
-                //game's item options:
-                const gameItems = ['rock', 'paper', 'scissors'];
+            let i;
+            let winOrLose;
+            let myScore = 0;
+            let compScore = 0;
+            let playerSelection;
+            let computerSelection;
 
-                //value containers:
-                let i;
-                let playerSelection;
-                let computerSelection;
-                let winOrLose;
-                let myScore = 0;
-                let compScore = 0;
+            function startGame(){
+                pickItem();
 
+                console.log (
+                    `
+                    ||*****Total Score*****||
+                    =========================
+                    Player: ${myScore} vs. Computer: ${compScore}
+                    `
+                );
+
+                gameRecap();
+            }
+
+            startGame();
+
+            function pickItem() {
                 for (i = 0; i < 5; i++) {
-                    //player selects an item:
                     const playerSelection = 
                     prompt("Rock, Paper, or Scissors? What's your choice?").toLowerCase();
-                    
                     console.log(`My Selection is: ${playerSelection}`);
 
-                    //random item selection from gameItems array for computer's item choice:
-                    function computerPlay() {
-                        const itemChoice = Math.floor(Math.random()*gameItems.length);
-                        return gameItems[itemChoice];
-                    }
-
-                    //computer selects an item:
-                    computerSelection = computerPlay();
+                    computerSelection = computerPicks();
                     console.log(`Computer's Selection is: ${computerSelection}`);
 
-                    //determine winner:
-                    winOrLose = playRound(playerSelection, computerSelection);
+                    winOrLose = theWinnerIs(playerSelection, computerSelection);
 
-                    //score logic:
-                    if (winOrLose === 'You Win!') {
-                            console.log(winOrLose);
-                            console.log("***========================***");
-                            ++myScore;
-                        } else if (winOrLose === "It's a tie!") {
-                            console.log(winOrLose);
-                            console.log("***========================***");
-                        } else {
-                            console.log(winOrLose);
-                            console.log("***========================***");
-                            ++compScore;
-                    }
+                    scoreCalc();
                 }
+            }
 
-                //winner determination logic:
-                function playRound(pSelection, cSelection) {
-                    if (pSelection === 'rock' && cSelection === 'scissors') {
-                        return 'You Win!';
-                    } else if (pSelection === 'scissors' && cSelection === 'rock') {
-                        return 'You Lose! Rock crushes Scissors';
-                    } else if (pSelection === 'rock' && cSelection === 'paper') {
-                        return 'You Lose! Paper covers Rock';
-                    } else if (pSelection === 'paper' && cSelection === 'rock') {
-                        return 'You Win!';
-                    } else if (pSelection === 'paper' && cSelection === 'scissors') {
-                        return 'You Lose! Scissors cuts Paper';
-                    } else if (pSelection === 'scissors' && cSelection === 'paper') {
-                        return 'You Win!';
-                    } else if (pSelection === 'rock' && cSelection === 'rock') {
-                        return "It's a tie!";
-                    } else if (pSelection === 'scissors' && cSelection === 'scissors') {
-                        return "It's a tie!";
-                    } else if (pSelection === 'paper' && cSelection === 'paper') {
-                        return "It's a tie!";
-                    } else {
-                        return ("Oops! That's a wrong choice!" + 
-                        "\nChoose either Rock, Paper, or Scissors" + 
-                        "\nAll the best!");
-                    }
+            function computerPicks() {
+                const gameItems = ['rock', 'paper', 'scissors'];
+                const itemChoice = Math.floor(Math.random()*gameItems.length);
+                return gameItems[itemChoice];
+            }
+
+            function theWinnerIs(pSelection, cSelection) {
+                if (pSelection === 'rock' && cSelection === 'scissors') {
+                    return 'You Win!';
+                } else if (pSelection === 'scissors' && cSelection === 'rock') {
+                    return 'You Lose! Rock crushes Scissors';
+                } else if (pSelection === 'rock' && cSelection === 'paper') {
+                    return 'You Lose! Paper covers Rock';
+                } else if (pSelection === 'paper' && cSelection === 'rock') {
+                    return 'You Win!';
+                } else if (pSelection === 'paper' && cSelection === 'scissors') {
+                    return 'You Lose! Scissors cuts Paper';
+                } else if (pSelection === 'scissors' && cSelection === 'paper') {
+                    return 'You Win!';
+                } else if (pSelection === 'rock' && cSelection === 'rock') {
+                    return "It's a tie!";
+                } else if (pSelection === 'scissors' && cSelection === 'scissors') {
+                    return "It's a tie!";
+                } else if (pSelection === 'paper' && cSelection === 'paper') {
+                    return "It's a tie!";
+                } else {
+                    return ("Oops! That's a wrong choice!" + 
+                    "\nChoose either Rock, Paper, or Scissors" + 
+                    "\nAll the best!");
                 }
+            }
 
-                //display total score:
-                console.log (`Player: ${myScore} vs. Computer: ${compScore}`)
+            function scoreCalc() {
+                if (winOrLose === 'You Win!') {
+                    console.log(winOrLose);
+                    console.log("***========================***");
+                    ++myScore;
+                } else if (winOrLose === "It's a tie!") {
+                    console.log(winOrLose);
+                    console.log("***========================***");
+                } else {
+                    console.log(winOrLose);
+                    console.log("***========================***");
+                    ++compScore;
+                }
+            }
 
-                //appraisal message logic:
+            function gameRecap() {
                 if (myScore > compScore) {
                     console.log ("Congratulations!!! You won the game!");
                     console.log("***========================***");
@@ -99,9 +105,6 @@
                     console.log("***========================***");
                 }
             }
-
-            //invoke game:
-            game();
         </script>
     </body>
 </html>
