@@ -31,7 +31,7 @@ function playSound(event) {
 
 function playerPicks(event) {
     if (i <= 5) {
-        gameRounds[i].getElementsByClassName('player-score')[0].innerHTML = event.target.alt;
+        gameRounds[i].getElementsByClassName('player-score')[0].textContent = event.target.alt;
         playerSelection = event.target.alt.toLowerCase();
     }
 }
@@ -39,43 +39,47 @@ function playerPicks(event) {
 function computerPicks() {
     const gameItems = ['Rock', 'Paper', 'Scissors'];
     const itemChoice = Math.floor(Math.random()*gameItems.length);
-    gameRounds[i].getElementsByClassName('cpu-score')[0].innerHTML = gameItems[itemChoice];
+    gameRounds[i].getElementsByClassName('cpu-score')[0].textContent = gameItems[itemChoice];
     computerSelection = gameItems[itemChoice].toLowerCase();
 }
 
 function thisRoundsResult(pSelection, cSelection) {
-    const addClass = gameRounds[i].classList;
+    const roundsDivClasses = gameRounds[i].classList;
+    const cpuTotalSpan = document.querySelector('.cpu-total');
+    const playerTotalSpan = document.querySelector('.player-total');
+
     if (pSelection === 'rock' && cSelection === 'scissors') {
-        addClass.add('win');
+        roundsDivClasses.add('win');
         ++myScore;
-        document.querySelector('.player-total').innerHTML = myScore;
-    } else if (pSelection === 'scissors' && cSelection === 'rock') {
-        addClass.add('lose-rockwins');
-        ++compScore;
-        document.querySelector('.cpu-total').innerHTML = compScore;
-    } else if (pSelection === 'rock' && cSelection === 'paper') {
-        addClass.add('lose-paperwins');
-        ++compScore;
-        document.querySelector('.cpu-total').innerHTML = compScore;
+        playerTotalSpan.textContent = myScore;
     } else if (pSelection === 'paper' && cSelection === 'rock') {
-        addClass.add('win');
+        roundsDivClasses.add('win');
         ++myScore;
-        document.querySelector('.player-total').innerHTML = myScore;
-    } else if (pSelection === 'paper' && cSelection === 'scissors') {
-        addClass.add('lose-scissorswins');
-        ++compScore;
-        document.querySelector('.cpu-total').innerHTML = compScore;
+        playerTotalSpan.textContent = myScore;
     } else if (pSelection === 'scissors' && cSelection === 'paper') {
-        addClass.add('win');
+        roundsDivClasses.add('win');
         ++myScore;
-        document.querySelector('.player-total').innerHTML = myScore;
+        playerTotalSpan.textContent = myScore;
+    } else if (pSelection === 'scissors' && cSelection === 'rock') {
+        roundsDivClasses.add('lose-rockwins');
+        ++compScore;
+        cpuTotalSpan.textContent = compScore;
+    } else if (pSelection === 'rock' && cSelection === 'paper') {
+        roundsDivClasses.add('lose-paperwins');
+        ++compScore;
+        cpuTotalSpan.textContent = compScore;
+    } else if (pSelection === 'paper' && cSelection === 'scissors') {
+        roundsDivClasses.add('lose-scissorswins');
+        ++compScore;
+        cpuTotalSpan.textContent = compScore;
     } else if (pSelection === 'rock' && cSelection === 'rock') {
-        addClass.add('draw');
+        roundsDivClasses.add('draw');
     } else if (pSelection === 'scissors' && cSelection === 'scissors') {
-        addClass.add('draw');
+        roundsDivClasses.add('draw');
     } else if (pSelection === 'paper' && cSelection === 'paper') {
-        addClass.add('draw');
+        roundsDivClasses.add('draw');
     }
+
     ++i;
 
     if (i === 5) {
@@ -84,18 +88,20 @@ function thisRoundsResult(pSelection, cSelection) {
 }
 
 function finalResult() {
+    const hideChoiceItemsDiv = document.getElementById('choice-items').style.visibility = "hidden";
+    const choiceDivClasses = document.getElementById('choice').classList;
     if (myScore > compScore) {
-        document.getElementById('choice-items').style.visibility = "hidden";
-        document.getElementById('choice').classList.add('winner');
+        hideChoiceItemsDiv;
+        choiceDivClasses.add('winner');
         playWinnerSound();
         insertPlayAgainBtn();
     }else if (myScore === compScore) {
-        document.getElementById('choice-items').style.visibility = "hidden";
-        document.getElementById('choice').classList.add('deadlock');
+        hideChoiceItemsDiv;
+        choiceDivClasses.add('deadlock');
         insertPlayAgainBtn();
     } else {
-        document.getElementById('choice-items').style.visibility = "hidden";
-        document.getElementById('choice').classList.add('lose');
+        hideChoiceItemsDiv;
+        choiceDivClasses.add('lose');
         insertPlayAgainBtn();
     }
 }
@@ -108,7 +114,7 @@ function playWinnerSound() {
 
 function insertPlayAgainBtn() {
     const btn = document.createElement('button');
-    btn.innerHTML = "Play again?";
+    btn.textContent = 'Play again?';
     document.getElementById('choice').appendChild(btn);  
     btn.classList.add('play-again');
     document.querySelector('.play-again').addEventListener('click', resetGame);
@@ -127,8 +133,8 @@ function resetGame() {
 }
 
 function resetScoreBoard() {
-    document.querySelector('.player-total').innerHTML = 0;
-    document.querySelector('.cpu-total').innerHTML = 0;
+    document.querySelector('.player-total').textContent = 0;
+    document.querySelector('.cpu-total').textContent = 0;
 }
 
 function resetfinalResult() {
@@ -146,21 +152,21 @@ function resetfinalResult() {
 
 function resetAnalysis() {
     for (let i = 0; i < 5; i++) {
-        gameRounds[i].getElementsByClassName('player-score')[0].innerHTML = '';
-        gameRounds[i].getElementsByClassName('cpu-score')[0].innerHTML = '';
+        gameRounds[i].getElementsByClassName('player-score')[0].textContent = '';
+        gameRounds[i].getElementsByClassName('cpu-score')[0].textContent = '';
 
-        const analysisResultClass = gameRounds[i].classList;
+        const roundsDivClasses = gameRounds[i].classList;
 
-        if(analysisResultClass.contains('win')) {
-            analysisResultClass.toggle('win');
-        } else if (analysisResultClass.contains('lose-rockwins')) {
-            analysisResultClass.toggle('lose-rockwins');
-        } else if (analysisResultClass.contains('lose-paperwins')) {
-            analysisResultClass.toggle('lose-paperwins');
-        } else if (analysisResultClass.contains('lose-scissorswins')) {
-            analysisResultClass.toggle('lose-scissorswins');
-        } else if (analysisResultClass.contains('draw')) {
-            analysisResultClass.toggle('draw');
+        if(roundsDivClasses.contains('win')) {
+            roundsDivClasses.toggle('win');
+        } else if (roundsDivClasses.contains('lose-rockwins')) {
+            roundsDivClasses.toggle('lose-rockwins');
+        } else if (roundsDivClasses.contains('lose-paperwins')) {
+            roundsDivClasses.toggle('lose-paperwins');
+        } else if (roundsDivClasses.contains('lose-scissorswins')) {
+            roundsDivClasses.toggle('lose-scissorswins');
+        } else if (roundsDivClasses.contains('draw')) {
+            roundsDivClasses.toggle('draw');
         }
     }
 }
