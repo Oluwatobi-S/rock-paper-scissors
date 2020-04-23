@@ -3,108 +3,111 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>The Rock Paper Scissors Game</h1>
+        <div id='main'>
+            <h1>The Rock - Paper - Scissors Game</h1>
 
-        <script>
-            let i;
-            let winOrLose;
-            let myScore = 0;
-            let compScore = 0;
-            let playerSelection;
-            let computerSelection;
+            <span id='info-links'>
+                <a href='https://en.wikipedia.org/wiki/Rock%E2%80%93paper%E2%80%93scissors' class='link' target='_blank'>About Game</a>
 
-            function startGame(){
-                pickItem();
+                <span class='tooltip'>
+                    <a href='https://www.wikihow.com/Play-Rock,-Paper,-Scissors' class='link' target='_blank'>How To Play</a>
+                    <span class='tooltip-text'>
+                        <div>Rock crushes Scissors</div>
+                        <div class='tip'>Scissors cuts Paper</div>
+                        <div>Paper covers Rock</div>
+                    </span>
+                </span>
+            </span>
 
-                console.log (
-                    `
-                    ||*****Total Score*****||
-                    =========================
-                    Player: ${myScore} vs. Computer: ${compScore}
-                    `
-                );
+            <div id='scoreboard'>
+                <span id='player-board'>
+                    <h3>PLAYER</h3>
+                    <span class='scores player-total'>0</span>
+                </span>
 
-                gameRecap();
-            }
+                <span id='computer-board'>
+                    <h3>COMPUTER</h3>
+                    <span class='scores cpu-total'>0</span>
+                </span>
+            </div>
 
-            startGame();
+            <div id='choice'>
+                <div id='choice-items'>
+                    <h2>What is your choice?</h2>
+                    <img 
+                        src='assets/images/rock.png'
+                        class='images rock'
+                        alt='Rock'>
+                    <img 
+                        src='assets/images/paper.png' 
+                        class='images paper'
+                        alt='Paper'>
+                    <img 
+                        src='assets/images/kisspng-scissors-hair-cutting-shears-cutting-hair-barber-5adb352ab6e447.2381129215243154347491.png' 
+                        class='images scissors'
+                        alt='Scissors'>
+                </div>
+            </div>
+        </div>
 
-            function pickItem() {
-                for (i = 0; i < 5; i++) {
-                    const playerSelection = 
-                    prompt("Rock, Paper, or Scissors? What's your choice?").toLowerCase();
-                    console.log(`My Selection is: ${playerSelection}`);
+        <audio 
+            class='rock' 
+            src='assets/sounds/impact_rock_large_rockpool_dry_002.mp3' 
+            preload='auto'>
+        </audio>
+        <audio 
+            class='paper' 
+            src='assets/sounds/zapsplat_foley_notepad_page_thin_paper_a4_ring_binded_rip_tear_from_pad_002_33417.mp3' 
+            preload='auto'>
+        </audio>
+        <audio 
+            class='scissors' 
+            src='assets/sounds/zapsplat_office_scissors_cut_air_x3_12284.mp3' 
+            preload='auto'>
+        </audio>
+        <audio 
+            class='you-win' 
+            src='assets/sounds/cartoon_success_fanfair.mp3' 
+            preload='auto'>
+        </audio>
 
-                    computerSelection = computerPicks();
-                    console.log(`Computer's Selection is: ${computerSelection}`);
+        <div id='analysis'>
+            <div class='rounds r-one'>
+                <h3>Round 1</h3>
+                <div>
+                    <div><span class=rival>Player</span><span class='player-score'></span></div>
+                    <div><span class=rival>Computer</span><span class='cpu-score'></span></div>
+                </div>
+            </div>
 
-                    winOrLose = theWinnerIs(playerSelection, computerSelection);
+            <div class='rounds r-two'>
+                <h3>Round 2</h3>
+                <div><span class=rival>Player</span><span class='player-score'></span></div>
+                <div><span class=rival>Computer</span><span class='cpu-score'></span></div>
+            </div>
 
-                    scoreCalc();
-                }
-            }
+            <div class='rounds r-three'>
+                <h3>Round 3</h3>
+                <div><span class=rival>Player</span><span class='player-score'></span></div>
+                <div><span class=rival>Computer</span><span class='cpu-score'></span></div>
+            </div>
 
-            function computerPicks() {
-                const gameItems = ['rock', 'paper', 'scissors'];
-                const itemChoice = Math.floor(Math.random()*gameItems.length);
-                return gameItems[itemChoice];
-            }
+            <div class='rounds r-four'>
+                <h3>Round 4</h3>
+                <div><span class=rival>Player</span><span class='player-score'></span></div>
+                <div><span class=rival>Computer</span><span class='cpu-score'></span></div>
+            </div>
 
-            function theWinnerIs(pSelection, cSelection) {
-                if (pSelection === 'rock' && cSelection === 'scissors') {
-                    return 'You Win!';
-                } else if (pSelection === 'scissors' && cSelection === 'rock') {
-                    return 'You Lose! Rock crushes Scissors';
-                } else if (pSelection === 'rock' && cSelection === 'paper') {
-                    return 'You Lose! Paper covers Rock';
-                } else if (pSelection === 'paper' && cSelection === 'rock') {
-                    return 'You Win!';
-                } else if (pSelection === 'paper' && cSelection === 'scissors') {
-                    return 'You Lose! Scissors cuts Paper';
-                } else if (pSelection === 'scissors' && cSelection === 'paper') {
-                    return 'You Win!';
-                } else if (pSelection === 'rock' && cSelection === 'rock') {
-                    return "It's a tie!";
-                } else if (pSelection === 'scissors' && cSelection === 'scissors') {
-                    return "It's a tie!";
-                } else if (pSelection === 'paper' && cSelection === 'paper') {
-                    return "It's a tie!";
-                } else {
-                    return ("Oops! That's a wrong choice!" + 
-                    "\nChoose either Rock, Paper, or Scissors" + 
-                    "\nAll the best!");
-                }
-            }
+            <div class='rounds r-five'>
+                <h3>Round 5</h3>
+                <div><span class=rival>Player</span><span class='player-score'></span></div>
+                <div><span class=rival>Computer</span><span class='cpu-score'></span></div>
+            </div>
+        </div>
 
-            function scoreCalc() {
-                if (winOrLose === 'You Win!') {
-                    console.log(winOrLose);
-                    console.log("***========================***");
-                    ++myScore;
-                } else if (winOrLose === "It's a tie!") {
-                    console.log(winOrLose);
-                    console.log("***========================***");
-                } else {
-                    console.log(winOrLose);
-                    console.log("***========================***");
-                    ++compScore;
-                }
-            }
-
-            function gameRecap() {
-                if (myScore > compScore) {
-                    console.log ("Congratulations!!! You won the game!");
-                    console.log("***========================***");
-                }else if (myScore === compScore) {
-                    console.log ("That's a Draw!");
-                    console.log("***========================***");
-                } else {
-                    console.log ("Game Lost. Try again.");
-                    console.log("***========================***");
-                }
-            }
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>

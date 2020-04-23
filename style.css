@@ -1,0 +1,269 @@
+@font-face {
+    font-family: 'digital-7';
+    src: url('assets/fonts/digital-7.regular.ttf');
+}
+
+@font-face {
+    font-family: 'dosis-book';
+    src: url('assets/fonts/dosis.book.ttf');
+}
+
+@font-face {
+    font-family: 'orbitron-light';
+    src: url('assets/fonts/orbitron.light.otf');
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: rgb(202, 190, 180);
+}
+
+#main {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'orbitron-light';
+    letter-spacing: .5rem;
+    margin-bottom: 0;
+}
+
+#info-links {
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.link {
+    text-decoration: none;
+    color: #B8860B;
+    margin: 0 3rem;
+}
+
+.link:hover {
+    color: #808000;
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #B8860B;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 0;
+    opacity: 0;
+    transition: opacity 0.7s;
+    position: absolute;
+    left: 75%;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: .9;
+}
+
+.tip {
+    margin: 5px 0;
+}
+
+#scoreboard {
+    max-width: 700px;
+    padding: 4rem 8rem;
+    background-color: rgb(203, 203, 203);
+    border: 2px solid rgb(63, 63, 63);
+    border-radius: 10px;
+    box-shadow: 5px 8px 20px 0 rgba(0,0,0, .2);
+}
+
+#scoreboard, #analysis {
+    display: flex;
+    justify-content: center;
+}
+
+.scores {
+    font-size: 5rem;
+    font-weight: 300;
+}
+
+#player-board, #computer-board {
+    background: linear-gradient(#c6d3c2, #c6d1c0);
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+    border-radius: 5px;
+    font-family: 'digital-7';
+    padding: 1.5rem 1rem;
+    margin: 1em;
+    height: 120px;
+    width: 100px;
+}
+
+#player-board h3, #computer-board h3 {
+    font-weight: 400;
+}
+
+#choice {
+    width: 100vw;
+    height: 240px;
+}
+
+.winner {
+    background-image: url('assets/images/90674.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.deadlock {
+    background-image: url('assets/images/source.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.lose {
+    background-image: url('assets/images/source-lose.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.play-again {
+    background-color: rgba(0,0,0,0.4); 
+    border: .1rem solid black;
+    border-radius: .5rem;
+    padding: 1rem .5rem;
+    font-size: 16px;
+    color: #7FFF00;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    position: relative;
+    bottom: 50%;
+}
+
+.play-again:hover {
+    background-color: black;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    color: white;
+  }
+
+#choice h2, #analysis, .link, .tooltip-text {
+    font-family: 'dosis-book';
+}
+
+.images:hover {
+    cursor: pointer;
+    transform: translateY(2px);
+}
+
+.images:active {
+    transform: translateY(4px);
+}
+
+.rock {
+    width: 12%;
+}
+
+.paper {
+    width: 11%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.scissors {
+    width: 6%;
+}
+
+#analysis {
+    width: 100%;
+    height: 130px;
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    --win-color: #218838;
+    --draw-color: #5A6268;
+    --lose-color: #C82333;
+}
+
+.rounds {
+    color: white;
+    box-sizing: border-box;
+    margin: 1rem 0;
+    width: 250px;
+    padding: 0 15px;
+
+}
+
+.rounds h3 {
+    margin: 0;
+}
+
+.rival {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 90px;
+}
+
+.win::after {
+    display: inline-block;
+    color: white;
+    background-color: var(--win-color);
+    margin-top: 8px;
+    width: 220px;
+    height: 28px;
+    content: 'You Win!';
+    text-align: center;
+}
+
+.lose-rockwins::after {
+    display: inline-block;
+    color: white;
+    background-color: var(--lose-color);
+    margin-top: 8px;
+    width: 220px;
+    height: 28px;
+    content: 'You Lose! Rock crushes Scissors';
+    text-align: center;
+}
+
+.lose-paperwins::after {
+    display: inline-block;
+    color: white;
+    background-color: var(--lose-color);
+    margin-top: 8px;
+    width: 220px;
+    height: 28px;
+    content: 'You Lose! Paper covers Rock';
+    text-align: center;
+}
+
+.lose-scissorswins::after {
+    display: inline-block;
+    color: white;
+    background-color: var(--lose-color);
+    margin-top: 8px;
+    width: 220px;
+    height: 28px;
+    content: 'You Lose! Scissors cuts Paper';
+    text-align: center;
+}
+
+.draw::after {
+    display: inline-block;
+    color: white;
+    background-color: var(--draw-color);
+    margin-top: 8px;
+    width: 220px;
+    height: 28px;
+    content: "It's a tie!";
+    text-align: center;
+}
